@@ -86,7 +86,7 @@ router.delete("/:id", auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     // Check if the same person is deleting
-    if (post.user.toSring() !== req.user.id) {
+    if (post.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User noth authorized" });
     }
 
@@ -111,9 +111,10 @@ router.put("/like/:id", auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     // Check if the post has already been liked
-    if (post.likes.find((like) => like.user.toSring() === req.user.id)) {
+
+    if (post.likes.find((like) => like.user.toString() === req.user.id)) {
       const newLikes = post.likes.filter(
-        (like) => like.user.toString() === req.user.id
+        (like) => like.user.toString() !== req.user.id
       );
       post.likes = newLikes;
     } else {
@@ -121,7 +122,7 @@ router.put("/like/:id", auth, async (req, res) => {
     }
     post.save();
 
-    res.json(post.likes);
+    res.json({ id: post._id, likes: post.likes });
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server Error");
@@ -182,12 +183,12 @@ router.delete("/:id/comment/:comment_id", auth, async (req, res) => {
     }
 
     // Check user
-    if (comment.user.toSring() !== req.user.id) {
+    if (comment.user.toString() !== req.user.id) {
       return res.status(401).json({ msg: "User not authorized" });
     }
 
     const newComment = post.comments.filter(
-      (comment) => comment.id.toString() === req.params.comment_id
+      (comment) => comment.id.toString() !== req.params.comment_id
     );
 
     post.comments = newComment;
