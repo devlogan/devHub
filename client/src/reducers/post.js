@@ -1,10 +1,10 @@
 import {
   GET_POSTS,
+  GET_POST,
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
   ADD_POST,
-  GET_POST,
   ADD_COMMENT,
   REMOVE_COMMENT,
 } from "../actions/types";
@@ -58,12 +58,16 @@ export default function (state = initialState, action) {
         ),
         loading: false,
       };
+
     case ADD_COMMENT:
       return {
         ...state,
-        post: { ...state.post, comments: payload },
-        loading: false,
+        post: {
+          ...state.post,
+          comments: payload,
+        },
       };
+
     case REMOVE_COMMENT:
       return {
         ...state,
@@ -73,8 +77,8 @@ export default function (state = initialState, action) {
             (comment) => comment._id !== payload
           ),
         },
-        loading: false,
       };
+
     default:
       return state;
   }

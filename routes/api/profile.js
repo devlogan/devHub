@@ -19,9 +19,13 @@ router.get("/me", auth, async (req, res) => {
       user: req.user.id,
     }).populate("user", ["name", "avatar"]);
 
+    console.log(profile);
+
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
+    console.log(profile);
+    res.json(profile);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server Error");
@@ -74,6 +78,8 @@ router.post(
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
 
+    console.log(skills);
+
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
@@ -96,7 +102,6 @@ router.post(
           { $set: profileFields },
           { new: true }
         );
-
         return res.json(profile);
       }
 
@@ -296,10 +301,12 @@ router.put(
       description,
     };
 
+    console.log(newEdu);
+
     try {
       const profile = await Profile.findOne({ user: req.user.id });
 
-      profile.experience.unshift(newEdu);
+      profile.education.unshift(newEdu);
 
       await profile.save();
 
