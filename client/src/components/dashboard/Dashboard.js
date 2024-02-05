@@ -7,7 +7,7 @@ import Loader from "../layout/Loader";
 import Education from "./Education";
 import Experience from "./Experience";
 import { getCurrentProfile } from "../../actions/profile";
-import DashboardActions from "./DashBoardActions";
+import DashboardActions from "./DashboardActions";
 
 const Dashboard = ({
   auth: { isAuthenticated, user },
