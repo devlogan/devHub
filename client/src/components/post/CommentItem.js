@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
+import deleteIcon from "../../assets/delete.png";
 
 import { deleteCommentById } from "../../actions/post";
 
@@ -24,13 +25,12 @@ const CommentItem = ({
         <p class="my-1">{text}</p>
         <p class="post-date">Posted on {dateFormat(date, "dd-mmm-yy")}</p>
         {!auth.loading && user === auth.user._id && (
-          <button
-            type="button"
-            class="btn btn-danger"
+          <img
+            src={deleteIcon}
+            alt="delete"
+            className="button-icon"
             onClick={() => deleteCommentById(postId, _id)}
-          >
-            <i class="fas fa-times"></i>
-          </button>
+          />
         )}
       </div>
     </div>

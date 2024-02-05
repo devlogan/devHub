@@ -139,6 +139,13 @@ img {
   outline: none;
 }
 
+.button-icon {
+  width: 34px !important;
+  height: 34px !important;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
 .badge {
   font-size: 0.8rem;
   padding: 0.1rem;
@@ -477,7 +484,7 @@ button {
 }
 
 .post img {
-  width: 100px;
+  width: 60px;
 }
 
 .post .comment-count {

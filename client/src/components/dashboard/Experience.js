@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import dateFormat from "dateformat";
 import { deleteExperience } from "../../actions/profile";
+import deleteIcon from "../../assets/delete.png";
 
 const Experience = ({ experience, deleteExperience }) => {
   return (
@@ -11,25 +12,22 @@ const Experience = ({ experience, deleteExperience }) => {
       <table className="table">
         <thead>
           <tr>
-            <th>Company</th>
-            <th className="hide-sm">Title</th>
-            <th className="hide-sm">Years</th>
-            <th></th>
+            <th width="300px">Company</th>
+            <th width="300px" className="hide-sm">
+              Title
+            </th>
+            <th width="200px" className="hide-sm">
+              Years
+            </th>
+            <th width="50px"></th>
           </tr>
         </thead>
         <tbody>
           {experience.map((exp) => {
-            const {
-              title,
-              company,
-              location,
-              from,
-              to,
-              description,
-              _id,
-            } = exp;
+            const { title, company, location, from, to, description, _id } =
+              exp;
             return (
-              <tr>
+              <tr key={_id}>
                 <td>{company}</td>
                 <td className="hide-sm">{title}</td>
                 <td className="hide-sm">
@@ -37,12 +35,12 @@ const Experience = ({ experience, deleteExperience }) => {
                   {dateFormat(to, "dd-mmm-yy")}
                 </td>
                 <td>
-                  <button
-                    className="btn btn-danger"
+                  <img
+                    src={deleteIcon}
+                    alt="delete"
+                    className="button-icon"
                     onClick={() => deleteExperience(_id)}
-                  >
-                    Delete
-                  </button>
+                  />
                 </td>
               </tr>
             );

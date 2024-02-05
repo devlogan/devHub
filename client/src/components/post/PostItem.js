@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import { connect } from "react-redux";
+import likeIcon from "../../assets/like.png";
+import deleteIcon from "../../assets/delete.png";
 
 import { addOrUpdateLike, deletePostById } from "../../actions/post";
 
@@ -24,34 +26,29 @@ const PostItem = ({
       <p className="my-1">{text}</p>
       <p className="post-date">Posted on {dateFormat(date, "dd-mmm-yy")}</p>
       {showActions && (
-        <Fragment>
-          <button
-            type="button"
-            className="btn btn-light"
-            onClick={() => addOrUpdateLike(_id)}
-          >
-            <i className="fas fa-thumbs-up"></i>
-            {!!likes.length && <span>{likes.length}</span>}
-          </button>
-          {/* <button type="button" className="btn btn-light">
-        <i className="fas fa-thumbs-down"></i>
-      </button> */}
+        <div style={{ display: "flex" }}>
           <Link to={`/post/${_id}`} className="btn btn-primary">
             Discussion{" "}
             {!!comments.length && (
               <span className="comment-count">{comments.length}</span>
             )}
           </Link>
+          <img
+            src={likeIcon}
+            alt="like"
+            className="button-icon"
+            onClick={() => addOrUpdateLike(_id)}
+          />
+          {/* {!!likes.length && <span>{likes.length}</span>} */}
           {!auth.loading && user === auth.user._id && (
-            <button
-              type="button"
-              className="btn btn-danger"
+            <img
+              src={deleteIcon}
+              alt="delete"
+              className="button-icon"
               onClick={() => deletePostById(_id)}
-            >
-              <i className="fas fa-times"></i>
-            </button>
+            />
           )}
-        </Fragment>
+        </div>
       )}
     </div>
   </div>
