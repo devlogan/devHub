@@ -7,7 +7,7 @@ import Loader from "../layout/Loader";
 import Education from "./Education";
 import Experience from "./Experience";
 import { getCurrentProfile } from "../../actions/profile";
-import DashboardActions from "./DashboardActions";
+import { DashBoardActions } from "./DashboardActions";
 
 const Dashboard = ({
   auth: { isAuthenticated, user },
@@ -28,7 +28,7 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
-          <DashboardActions />
+          <DashBoardActions />
           {!!profile.experience.length && <Experience />}
           {!!profile.education.length && <Education />}
         </Fragment>
