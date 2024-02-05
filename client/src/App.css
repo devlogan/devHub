@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #22b5f3;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -298,12 +298,18 @@ button {
   background: var(--light-color);
 }
 
+/*logo*/
+.logo {
+  padding-top: 1rem;
+  width: 200px;
+}
+
 /* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.7rem 2rem;
+  padding: 0 2rem;
   position: fixed;
   z-index: 1;
   width: 100%;
@@ -316,13 +322,13 @@ button {
   display: flex;
 }
 
-.navbar a {
+.navbar-list a {
   color: #fff;
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
 
-.navbar a:hover {
+.navbar-list a:hover {
   color: var(--primary-color);
 }
 

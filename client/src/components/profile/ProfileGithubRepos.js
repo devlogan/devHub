@@ -9,9 +9,6 @@ const ProfileGithubRepos = ({ username, getGithubRepos, repos }) => {
     getGithubRepos(username);
   }, [getGithubRepos]);
 
-  console.log(repos);
-
-  // const {}
   return (
     <div class="profile-github">
       <h2 class="text-primary my-1">

@@ -21,7 +21,6 @@ const Education = ({ education, deleteEducation, deleteAccount }) => {
         <tbody>
           {education.map((edu) => {
             const { school, degree, from, to, _id } = edu;
-            console.log(edu);
             return (
               <tr>
                 <td>{school}</td>

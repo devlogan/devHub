@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import Loader from "../layout/Loader";
 import Education from "./Education";
 import Experience from "./Experience";
-import DashboardActions, { DashBoardActions } from "./DashBoardActions";
 import { getCurrentProfile } from "../../actions/profile";
+import DashboardActions from "./DashBoardActions";
 
 const Dashboard = ({
   auth: { isAuthenticated, user },
@@ -28,7 +28,7 @@ const Dashboard = ({
       </p>
       {profile !== null ? (
         <Fragment>
-          <DashBoardActions />
+          <DashboardActions />
           {!!profile.experience.length && <Experience />}
           {!!profile.education.length && <Education />}
         </Fragment>

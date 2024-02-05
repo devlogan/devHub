@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const ProfileItem = ({ profile }) => {
-  console.log(profile);
   const {
     user: { _id, name, avatar },
     location,

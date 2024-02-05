@@ -1,6 +1,5 @@
 const express = require("express");
 const request = require("request");
-const config = require("config");
 const router = express.Router();
 const auth = require("../../middleware/auth");
 const { check, validationResult } = require("express-validator");
@@ -19,12 +18,9 @@ router.get("/me", auth, async (req, res) => {
       user: req.user.id,
     }).populate("user", ["name", "avatar"]);
 
-    console.log(profile);
-
     if (!profile) {
       return res.status(400).json({ msg: "There is no profile for this user" });
     }
-    console.log(profile);
     res.json(profile);
   } catch (err) {
     console.log(err.message);
@@ -77,8 +73,6 @@ router.post(
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
-
-    console.log(skills);
 
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
@@ -199,15 +193,8 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      title,
-      company,
-      location,
-      from,
-      to,
-      current,
-      description,
-    } = req.body;
+    const { title, company, location, from, to, current, description } =
+      req.body;
 
     const newExp = {
       title,
@@ -248,8 +235,6 @@ router.delete("/experience/:exp_id", auth, async (req, res) => {
     );
     profile.experience = newExperience;
 
-    console.log(newExperience);
-
     await profile.save();
 
     res.json(profile);
@@ -281,15 +266,8 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      school,
-      degree,
-      fieldofstudy,
-      from,
-      to,
-      current,
-      description,
-    } = req.body;
+    const { school, degree, fieldofstudy, from, to, current, description } =
+      req.body;
 
     const newEdu = {
       school,
@@ -300,8 +278,6 @@ router.put(
       current,
       description,
     };
-
-    console.log(newEdu);
 
     try {
       const profile = await Profile.findOne({ user: req.user.id });
@@ -345,13 +321,11 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 // @desc  Get user repos from Github
 // @access Public
 router.get("/github/:username", async (req, res) => {
+  const githubSecret = process.env.GITHUB_SECRET;
+  const githubClientId = process.env.GITHUB_CLIENT_ID;
   try {
     const options = {
-      uri: `https://api.github.com/users/${
-        req.params.username
-      }/repos?per_page=5&sort=created:ascclient_id=${config.get(
-        "githubClientId"
-      )}&client_secret=${config.get("githubSecret")}`,
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:ascclient_id=${githubClientId}&client_secret=${githubSecret}`,
       method: "GET",
       headers: { "user-agent": "node-js" },
     };

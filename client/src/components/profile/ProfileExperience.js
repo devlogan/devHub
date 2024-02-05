@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import dateFormat from "dateformat";
 
 const ProfileExperience = ({ experience }) => {
-  console.log(experience);
   const { company, current, from, to, title, description } = experience;
   return (
     <div>

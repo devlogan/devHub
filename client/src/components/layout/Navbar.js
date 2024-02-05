@@ -2,11 +2,12 @@ import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import logo from "../../assets/logo.png";
 import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
-    <ul>
+    <ul className="navbar-list">
       <li>
         <Link to="/profiles">
           {/* <i className="fas fa-user" /> */}
@@ -35,7 +36,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   const guestLinks = (
-    <ul>
+    <ul className="navbar-list">
       <li>
         <Link to="/profiles">
           {/* <i className="fas fa-user" /> */}
@@ -53,11 +54,14 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   return (
     <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-code"></i> DevHub
-        </Link>
-      </h1>
+      <Link to="/">
+        <img
+          src={logo}
+          className="logo"
+          alt="devhub"
+          style={{ width: "200px" }}
+        />
+      </Link>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}

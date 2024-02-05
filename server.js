@@ -2,10 +2,15 @@ const express = require("express");
 const connectDB = require("./config/db");
 const path = require("path");
 
+require("dotenv").config();
+
 const app = express();
 
+// Load environment variables
+
+const mongoURI = process.env.MONGO_URI;
 // connect database
-connectDB();
+connectDB(mongoURI);
 
 // Init Middleware
 app.use(express.json({ extended: false }));
